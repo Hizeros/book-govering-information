@@ -7,6 +7,7 @@ def gen_request(request):
     3.图书具有作者、书名、出版社等属性
     '''
     pass
+import os
 
 # 创建一个空字典用于接收缓存的图书数据
 from cushy_storage import CushyDict
@@ -31,7 +32,7 @@ def _get_book_id(book_id):
     return str(time.time())
 
 # 增加图书
-def add_book(id_book,name_book,author_book,type_book,publish_book,num_book):
+def add_book():
     id_book = _get_book_id
     name_book = input('请输入书名：')
     author_book = input('请输入作者：')
@@ -50,12 +51,21 @@ def add_book(id_book,name_book,author_book,type_book,publish_book,num_book):
     '''
 
     with open("book_govering_information.txt","a",encoding="UTF-8")as f:
+        if os.path.getsize('book_govering_information.txt') != 0:
+            f.write
         f.write(str(cache['book_list']))
 
 
 # 删除图书
 def delete():
-    pass
+    del_id = int(input("请输入删除图书的编号："))
+# 把文件信息全部提取出来
+    with open("book_govering_information.txt","r") as f:
+        f.readlines
+# 循环查找想要编号的那一项
+# 找到那一项之后把那一项删除
+# 把删掉一项信息后的book_inf覆盖存储到文件中
+
 
 # 修改图书注释
 def change():
