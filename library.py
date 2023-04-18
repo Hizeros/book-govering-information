@@ -56,14 +56,10 @@ def add_book():
 
     with open("book_govering_information.txt","a",encoding="UTF-8") as f:
         # 换行\n保证数据在文件中按行存储，这样查询时用f.readlines()才能正常查询
-        if os.path.getsize('book_govering_information.txt') != 0:
-            f.write('\n')
-        f.write(str(book_information))
+        '''if os.path.getsize('book_govering_information.txt') != 0:
+            f.write('\n')'''
+        f.write(json.dumps(book_information)+'\n')
     return "添加成功！"
-
-if __name__ == '__main__':
-    a=add_book()
-    print(a)
 
 # 删除图书
 def delete_book():
@@ -82,16 +78,12 @@ def delete_book():
                 # 找到那一项之后跳过这一项
                 continue
             # 将其余项重新添加到新的列表中
-            new_inf_list.append(str(temp))
+            new_inf_list.append(temp)
     # 把删掉一项信息后的new_inf_list覆盖存储到文件中
     with open("book_govering_information.txt", "w") as f:
         for temp in new_inf_list:
             f.write(json.dumps(temp)+'\n') # 注意存储时一定要是字符串格式,换行存储让文件更容易读取
     return "删除成功"
-
-
-
-
 
 # 修改图书注释
 def change():
