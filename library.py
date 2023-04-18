@@ -75,7 +75,7 @@ def add_book():
 def delete_book():
     del_name = input("请输入删除图书的书名：")
     del_author = input("请输入删除图书的作者：")
-    del_id = int(input("请输入删除的图书的编号"))
+    # del_id = int(input("请输入删除的图书的编号"))
     inf_list=[]
     # 把文件信息全部提取出来
     with open("book_govering_information.txt","r", encoding='utf-8') as f:
@@ -85,7 +85,7 @@ def delete_book():
         new_inf_list=[]
         # 循环查找想要想要删除的书名或作者
         for temp in inf_list:
-            if del_name == temp["书名"] or del_author == temp["作者"] or del_id == temp["编号"]:
+            if del_name == temp["书名"] or del_author == temp["作者"]:
                 # 找到那一项之后跳过这一项
                 continue
             # 将其余项重新添加到新的列表中
@@ -142,8 +142,34 @@ def show_book():
 
 #功能菜单
 def menu():
-    pass
+    print("********欢迎来到小赖图书管理系统，请选择您想办理的业务！********")
+    print("********增加图书信息请输入1********")
+    print("********删除图书信息请输入2********")
+    print("********修改图书信息请输入3********")
+    print("********查询图书信息请输入4********")
+    print("********展示所有图书信息请输入5********")
 
 # 主程序，选择需要执行程序
 def main():
-    pass
+    menu()
+    num = int(input("请输入您的选择："))
+    if num == 1:
+        a = add_book()
+        print(a)
+    elif num == 2:
+        d = delete_book()
+        print(d)
+    elif num == 3:
+        c = change_book()
+        print(c)
+    elif num == 4:
+        q = query_book()
+        print(q)
+    else:
+        s = show_book()
+        print(s)
+
+if __name__ == '__main__':
+    main()
+
+
