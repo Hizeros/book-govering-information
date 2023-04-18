@@ -130,8 +130,15 @@ def query_book():
     return "查询成功！"
 
 # 展示所有图书信息
-def show():
-    pass
+def show_book():
+    print("***所有图书信息***")
+    inf_list = []
+    with open("book_govering_information.txt", "r", encoding='utf-8') as f:
+        for line in f:
+            inf_list.append(json.loads(line))
+        for temp in inf_list:
+            print(temp)
+    return "展示成功！"
 
 #功能菜单
 def menu():
