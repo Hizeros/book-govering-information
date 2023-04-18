@@ -117,8 +117,17 @@ def change_book():
     return "修改成功！"
 
 # 查询图书
-def query():
-    pass
+def query_book():
+    qu_name = input("请输入查询的图书书名：")
+    qu_author = input("请输入查询的图书作者：")
+    inf_list = []
+    with open("book_govering_information.txt","r",encoding='utf-8') as f:
+        for line in f:
+            inf_list.append(json.loads(line))
+        for temp in inf_list:
+            if qu_name == temp["书名"] or qu_author == temp["作者"]:
+                print(temp)
+    return "查询成功！"
 
 # 展示所有图书信息
 def show():
