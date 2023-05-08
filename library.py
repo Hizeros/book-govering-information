@@ -73,9 +73,7 @@ def add_book():
 
 # 删除图书
 def delete_book():
-    del_name = input("请输入删除图书的书名：")
-    del_author = input("请输入删除图书的作者：")
-    # del_id = int(input("请输入删除的图书的编号"))
+    del_id = input("请输入删除的图书的编号:")
     inf_list=[]
     # 把文件信息全部提取出来
     with open("book_govering_information.txt","r", encoding='utf-8') as f:
@@ -83,9 +81,9 @@ def delete_book():
         for line in f:
             inf_list.append(json.loads(line))
         new_inf_list=[]
-        # 循环查找想要想要删除的书名或作者
+        # 循环查找想要想要删除的书籍编号
         for temp in inf_list:
-            if del_name == temp["书名"] or del_author == temp["作者"]:
+            if del_id == temp["编号"]:
                 # 找到那一项之后跳过这一项
                 continue
             # 将其余项重新添加到新的列表中
@@ -124,9 +122,14 @@ def query_book():
     with open("book_govering_information.txt","r",encoding='utf-8') as f:
         for line in f:
             inf_list.append(json.loads(line))
+        #判断地址
+        has_exist = False
         for temp in inf_list:
             if qu_name == temp["书名"] or qu_author == temp["作者"]:
+                has_exist = True
                 print(temp)
+        if not has_exist:
+            return "当前书不存在，查询失败"
     return "查询成功！"
 
 # 展示所有图书信息
@@ -151,23 +154,29 @@ def menu():
 
 # 主程序，选择需要执行程序
 def main():
-    menu()
-    num = int(input("请输入您的选择："))
-    if num == 1:
-        a = add_book()
-        print(a)
-    elif num == 2:
-        d = delete_book()
-        print(d)
-    elif num == 3:
-        c = change_book()
-        print(c)
-    elif num == 4:
-        q = query_book()
-        print(q)
-    else:
-        s = show_book()
-        print(s)
+    while(1):
+        menu()
+        num = input("请输入您的选择：")
+        if '1' <= num <= '5':
+            if num == '1':
+                add_book()
+            elif num == '2':
+                d = delete_book()
+                print(d)
+            elif num == '3':
+                c = change_book()
+                print(c)
+            elif num == '4':
+                q = query_book()
+                print(q)
+            elif num == '5':
+                s = show_book()
+                print(s)
+            else:
+                print("感谢您的使用，欢迎您下次光临！")
+                break
+        else:
+            print("输入有误，请重新按规定输入1-5的数字")
 
 if __name__ == '__main__':
     main()
